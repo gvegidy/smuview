@@ -1,10 +1,6 @@
 # .SPEC-file to package RPMs for Fedora
 
-# adapt commit id and commitdate to match the git version you want to build
-%global commit 35e6d5421f9b3e675b557cf88e340c42aefca276
-%global commitdate 20190213
-
-# then download and build like this
+# download and build like this
 # (you need an rpmbuild dir, can be created with rpmdev-setuptree)
 #
 # cp smuview.spec $HOME/rpmbuild/SPECS
@@ -15,17 +11,15 @@
 Summary: SmuView is a Qt based source measure unit GUI for sigrok.
 Name: smuview
 Version: 0.0.1
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-Release: %{commitdate}.%{shortcommit}%{?dist}
+Release: 1%{?dist}
 License: GPLv3
 URL: https://github.com/knarfS/smuview
-Source: https://github.com/knarfS/%{name}/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
+Source: https://github.com/knarfS/%{name}/archive/%{name}-%{version}.tar.gz
 BuildRequires: libsigrok-cxx-devel
 BuildRequires: qwt-qt5-devel
 BuildRequires: qt5-devel
 BuildRequires: qt5-qtsvg-devel
 BuildRequires: qt5-qtbase-devel
-BuildRequires: qt5-qtsvg-devel
 BuildRequires: glibmm24-devel
 BuildRequires: boost-devel
 BuildRequires: rubygem-asciidoctor
@@ -38,7 +32,7 @@ device types (such as logic analyzers, oscilloscopes, multimeters, and more).
 SmuView is a Qt-based source measurement unit GUI for sigrok.
 
 %prep
-%autosetup -n %{name}-%{commit}
+%autosetup -n %{name}-%{name}-%{version}
 
 %build
 %cmake .
